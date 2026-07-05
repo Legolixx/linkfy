@@ -1,3 +1,12 @@
+// app/(protected)/links/page.tsx
+import { Suspense } from 'react'
+import { LinksPageLoader } from '@/components/links/links-page-loader'
+import { LinksPageSkeleton } from '@/components/links/links-page-skeleton'
+
 export default function LinksPage() {
-  return <h1 className="text-3xl font-bold">LinksPage</h1>;
+  return (
+    <Suspense fallback={<LinksPageSkeleton />}>
+      <LinksPageLoader />
+    </Suspense>
+  )
 }

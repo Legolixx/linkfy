@@ -1,5 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { Check, Loader2, X } from "lucide-react";
+import { useUsernameAvailability } from "@/hooks/use-username-availability";
+
 import {
   Card,
   CardHeader,
@@ -38,6 +42,20 @@ export function ProfileSection({
   onChange,
   setLocal,
 }: ProfileSectionProps) {
+  const [usernameDraft, setUsernameDraft] = useState(settings.username);
+  const { status: usernameStatus, check: checkUsername } =
+    useUsernameAvailability(userId, settings.username);
+  useEffect(() => {
+    if (usernameStatus === "available") {
+      onChange("username", usernameDraft, 0);
+    }
+  }, [usernameStatus, usernameDraft, onChange]);
+
+  function handleUsernameChange(value: string) {
+    setUsernameDraft(value);
+    checkUsername(value);
+  }
+
   return (
     <Card>
       <CardHeader className="border-b">
@@ -71,14 +89,33 @@ export function ProfileSection({
             <FieldLabel htmlFor="username">Username</FieldLabel>
             <div className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">linkfy.to/</span>
-              <Input
-                id="username"
-                value={settings.username}
-                onChange={(e) => onChange("username", e.target.value)}
-              />
+              <div className="relative flex-1">
+                <Input
+                  id="username"
+                  value={usernameDraft}
+                  onChange={(e) => handleUsernameChange(e.target.value)}
+                />
+                <span className="absolute right-2.5 top-1/2 -translate-y-1/2">
+                  {usernameStatus === "checking" && (
+                    <Loader2 className="size-4 animate-spin text-muted-foreground" />
+                  )}
+                  {usernameStatus === "available" && (
+                    <Check className="size-4 text-emerald-600" />
+                  )}
+                  {(usernameStatus === "taken" ||
+                    usernameStatus === "invalid") && (
+                    <X className="size-4 text-destructive" />
+                  )}
+                </span>
+              </div>
             </div>
             <FieldDescription>
-              This is your public page address.
+              {usernameStatus === "taken" && "Este username já está em uso."}
+              {usernameStatus === "invalid" &&
+                "Use 3-20 caracteres: letras minúsculas, números ou _."}
+              {usernameStatus === "idle" || usernameStatus === "same"
+                ? "This is your public page address."
+                : null}
             </FieldDescription>
           </Field>
           <Field>

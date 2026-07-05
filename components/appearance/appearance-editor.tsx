@@ -6,6 +6,7 @@ import { ThemeSection } from './theme-section'
 import { ButtonsTypographySection } from './buttons-typography-section'
 import { DisplayOptionsSection } from './display-options-section'
 import { LivePreview } from './live-preview'
+import { SaveIndicator } from './save-indicator'
 
 interface Link {
   id: string
@@ -20,10 +21,11 @@ interface AppearanceEditorProps {
 }
 
 export function AppearanceEditor({ userId, initialProfile, links }: AppearanceEditorProps) {
-  const { settings, update, setLocal } = useProfileSettings(userId, initialProfile)
+  const { settings, update, setLocal, status } = useProfileSettings(userId, initialProfile)
 
   return (
     <div className="flex flex-col gap-6">
+      <SaveIndicator status={status} />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
         {/* Editor column */}
         <div className="flex flex-col gap-6">
