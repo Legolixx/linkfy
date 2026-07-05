@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* valores convertidos de oklch -> hsl a partir do globals.css do v0 (light) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9.1%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9.1%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.2%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9.1%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 63%;
+    --chart-1: 0 0% 83.1%;
+    --chart-2: 0 0% 45.2%;
+    --chart-3: 0 0% 32.2%;
+    --chart-4: 0 0% 25%;
+    --chart-5: 0 0% 14.9%;
+    --radius: 0.625rem;
+    --brand: 142 71% 45%;
+    --brand-foreground: 0 0% 100%;
+    --brand-accent: 160 84% 39%;
+
+    --sidebar: 0 0% 98%;
+    --sidebar-foreground: 0 0% 3.9%;
+    --sidebar-primary: 0 0% 9.1%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 96.1%;
+    --sidebar-accent-foreground: 0 0% 9.1%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-ring: 0 0% 63%;
+  }
+
+  .dark {
+    /* valores convertidos de oklch -> hsl a partir do globals.css do v0 (dark) */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 9.1%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9.1%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 89.8%;
+    --primary-foreground: 0 0% 9.1%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    /* originais eram branco com opacidade: oklch(1 0 0 / 10%) e /15% */
+    --border: 0 0% 100% / 10%;
+    --input: 0 0% 100% / 15%;
+    --ring: 0 0% 45.2%;
+    --chart-1: 0 0% 83.1%;
+    --chart-2: 0 0% 45.2%;
+    --chart-3: 0 0% 32.2%;
+    --chart-4: 0 0% 25%;
+    --chart-5: 0 0% 14.9%;
+    --brand: 142 70% 50%;
+    --brand-foreground: 0 0% 100%;
+    --brand-accent: 160 84% 45%;
+
+    --sidebar: 0 0% 9.1%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 225.3 84.1% 49%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 14.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 100% / 10%;
+    --sidebar-ring: 0 0% 45.2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        hsl(var(--foreground) / 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        hsl(var(--foreground) / 0.05) 1px,
+        transparent 1px
+      );
+
+    background-size: 56px 56px;
+  }
+
+  .mask-radial-fade {
+    -webkit-mask-image: radial-gradient(
+      circle at center,
+      #000 40%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(circle at center, #000 40%, transparent 100%);
+  }
+
+  .glass {
+    background: hsl(var(--card) / 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.6);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--brand)),
+      hsl(var(--brand-accent))
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-pan 8s ease infinite;
+}

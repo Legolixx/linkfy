@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 40" width="150" height="40" aria-label="Linkfy Logo" role="img">
+  <path d="M16 28C11.5817 28 8 24.4183 8 20C8 15.5817 11.5817 12 16 12H22V15.5H16C13.5147 15.5 11.5 17.5147 11.5 20C11.5 22.4853 13.5147 24.5 16 24.5H22V28H16Z" fill="#10B981"/>
+  <path d="M30 12C34.4183 12 38 15.5817 38 20C38 24.4183 34.4183 28 30 28H24V24.5H30C32.4853 24.5 34.5 22.4853 34.5 20C34.5 17.5147 32.4853 15.5 30 15.5H24V12H30Z" fill="#059669"/>
+  <rect x="18" y="18.5" width="10" height="3" rx="1.5" fill="#10B981"/>
+  
+  <text x="46" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" fill="#059669" letter-spacing="-0.5">Linkfy</text>
+</svg>
