@@ -39,6 +39,7 @@ export async function updateSession(request: NextRequest) {
   // with the Supabase client, your users may be randomly logged out.
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
+  const { pathname } = request.nextUrl;
 
   if (
     request.nextUrl.pathname !== "/" &&
@@ -64,6 +65,13 @@ export async function updateSession(request: NextRequest) {
   //    return myNewResponse
   // If this is not done, you may be causing the browser and server to go out
   // of sync and terminate the user's session prematurely!
+
+  // Usuário autenticado tentando acessar telas de auth
+  if (user && pathname.startsWith("/auth")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/dashboard";
+    return NextResponse.redirect(url);
+  }
 
   return supabaseResponse;
 }
