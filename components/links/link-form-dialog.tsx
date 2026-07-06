@@ -1,10 +1,10 @@
 // components/links/link-form-dialog.tsx
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { Loader2, LinkIcon } from 'lucide-react'
+import { useEffect, useState } from "react";
+import { Loader2, LinkIcon } from "lucide-react";
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -13,73 +13,89 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from '@/components/ui/dialog'
-import { Field, FieldLabel, FieldGroup, FieldDescription } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { InputGroup, InputGroupInput, InputGroupAddon } from '@/components/ui/input-group'
-import type { Link, LinkInput } from '@/hooks/use-links'
+} from "@/components/ui/dialog";
+import {
+  Field,
+  FieldLabel,
+  FieldGroup,
+  FieldDescription,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import {
+  InputGroup,
+  InputGroupInput,
+  InputGroupAddon,
+} from "@/components/ui/input-group";
+import type { Link, LinkInput } from "@/hooks/use-links";
 
 interface LinkFormDialogProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  editing: Link | null
-  onSubmit: (input: LinkInput) => Promise<void>
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  editing: Link | null;
+  onSubmit: (input: LinkInput) => Promise<void>;
 }
 
 function normalizeUrl(value: string) {
-  const trimmed = value.trim()
-  if (!trimmed) return trimmed
-  if (!/^https?:\/\//i.test(trimmed)) return `https://${trimmed}`
-  return trimmed
+  const trimmed = value.trim();
+  if (!trimmed) return trimmed;
+  if (!/^https?:\/\//i.test(trimmed)) return `https://${trimmed}`;
+  return trimmed;
 }
 
-export function LinkFormDialog({ open, onOpenChange, editing, onSubmit }: LinkFormDialogProps) {
-  const [title, setTitle] = useState('')
-  const [url, setUrl] = useState('')
-  const [saving, setSaving] = useState(false)
-  const [urlError, setUrlError] = useState<string | null>(null)
+export function LinkFormDialog({
+  open,
+  onOpenChange,
+  editing,
+  onSubmit,
+}: LinkFormDialogProps) {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [urlError, setUrlError] = useState<string | null>(null);
 
   // sincroniza os campos toda vez que o dialog abre pra um link diferente (ou pra criar)
   useEffect(() => {
     if (open) {
-      setTitle(editing?.title ?? '')
-      setUrl(editing?.url ?? '')
-      setUrlError(null)
+      setTitle(editing?.title ?? "");
+      setUrl(editing?.url ?? "");
+      setUrlError(null);
     }
-  }, [open, editing])
+  }, [open, editing]);
 
   function validateUrl(value: string): boolean {
     try {
-      new URL(normalizeUrl(value))
-      return true
+      new URL(normalizeUrl(value));
+      return true;
     } catch {
-      return false
+      return false;
     }
   }
 
   async function handleSave() {
-    const trimmedTitle = title.trim()
-    const normalizedUrl = normalizeUrl(url)
+    const trimmedTitle = title.trim();
+    const normalizedUrl = normalizeUrl(url);
 
-    if (!trimmedTitle) return
+    if (!trimmedTitle) return;
     if (!validateUrl(normalizedUrl)) {
-      setUrlError('Digite uma URL válida.')
-      return
+      setUrlError("Digite uma URL válida.");
+      return;
     }
 
-    setSaving(true)
-    await onSubmit({ title: trimmedTitle, url: normalizedUrl })
-    setSaving(false)
-    onOpenChange(false)
+    setSaving(true);
+    await onSubmit({ title: trimmedTitle, url: normalizedUrl });
+    setSaving(false);
+    onOpenChange(false);
   }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{editing ? 'Edit link' : 'Create link'}</DialogTitle>
+          <DialogTitle>{editing ? "Edit link" : "Create link"}</DialogTitle>
           <DialogDescription>
-            {editing ? 'Update the title and destination for this link.' : 'Add a new link to your Linkfy page.'}
+            {editing
+              ? "Update the title and destination for this link."
+              : "Add a new link to your Linkfy page."}
           </DialogDescription>
         </DialogHeader>
         <FieldGroup>
@@ -103,22 +119,34 @@ export function LinkFormDialog({ open, onOpenChange, editing, onSubmit }: LinkFo
                 placeholder="https://example.com"
                 value={url}
                 onChange={(e) => {
-                  setUrl(e.target.value)
-                  setUrlError(null)
+                  setUrl(e.target.value);
+                  setUrlError(null);
                 }}
               />
             </InputGroup>
-            {urlError && <FieldDescription className="text-destructive">{urlError}</FieldDescription>}
+            {urlError && (
+              <FieldDescription className="text-destructive">
+                {urlError}
+              </FieldDescription>
+            )}
           </Field>
         </FieldGroup>
         <DialogFooter>
-          <DialogClose render={<Button variant="outline" disabled={saving}>Cancel</Button>} />
-          <Button onClick={handleSave} disabled={saving || !title.trim() || !url.trim()}>
-            {saving && <Loader2 className="animate-spin" />}
-            {editing ? 'Save changes' : 'Create link'}
+          <DialogClose asChild>
+            <Button variant="outline" disabled={saving}>
+              Cancel
+            </Button>
+          </DialogClose>
+
+          <Button
+            onClick={handleSave}
+            disabled={saving || !title.trim() || !url.trim()}
+          >
+            {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {editing ? "Save changes" : "Create link"}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
