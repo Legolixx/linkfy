@@ -1,3 +1,4 @@
+// components/appearance/live-preview.tsx
 'use client'
 
 import { Globe, AtSign, Share2, ExternalLink } from 'lucide-react'
@@ -11,18 +12,14 @@ import {
 } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { themePresets, accentColors } from '@/lib/mock-data'
+import { getLinkIcon } from '@/lib/link-icons'
 import type { ProfileSettings } from '@/hooks/use-profile-settings'
+import type { Link } from '@/hooks/use-links'
 
 const buttonStyleMap: Record<string, string> = {
   rounded: 'rounded-xl',
   square: 'rounded-none',
   pill: 'rounded-full',
-}
-
-interface Link {
-  id: string
-  title: string
-  enabled: boolean
 }
 
 interface LivePreviewProps {
@@ -36,13 +33,15 @@ export function LivePreview({ settings, links }: LivePreviewProps) {
     accentColors.find((a) => a.id === settings.accent_color)?.value ?? accentColors[0].value
   const visibleLinks = links.filter((l) => l.enabled).slice(0, 5)
 
+  console.log(links)
+
   return (
     <Card>
       <CardHeader className="border-b">
         <CardTitle>Live preview</CardTitle>
         <CardDescription>Updates as you edit.</CardDescription>
       </CardHeader>
-      <CardContent className='pt-5'>
+      <CardContent className="pt-5">
         <div
           className="flex flex-col items-center gap-5 rounded-2xl border border-border p-6"
           style={{ background: activeTheme.bg, color: activeTheme.fg }}
@@ -68,29 +67,29 @@ export function LivePreview({ settings, links }: LivePreviewProps) {
 
           <div className="flex w-full flex-col gap-2.5">
             {visibleLinks.length === 0 ? (
-              <p className="py-4 text-center text-xs opacity-60">
-                Add links to see them here.
-              </p>
+              <p className="py-4 text-center text-xs opacity-60">Add links to see them here.</p>
             ) : (
-              visibleLinks.map((link) => (
-                <div
-                  key={link.id}
-                  className={cn(
-                    'flex items-center justify-between px-4 py-2.5 text-xs font-medium',
-                    buttonStyleMap[settings.button_style],
-                  )}
-                  style={{ background: activeAccent, color: '#fff' }}
-                >
-                  <span className="truncate">{link.title}</span>
-                  <ExternalLink className="size-3.5 shrink-0 opacity-80" />
-                </div>
-              ))
+              visibleLinks.map((link) => {
+                const iconMeta = getLinkIcon(link.icon)
+                return (
+                  <div
+                    key={link.id}
+                    className={cn(
+                      'flex items-center gap-2 px-4 py-2.5 text-xs font-medium',
+                      buttonStyleMap[settings.button_style],
+                    )}
+                    style={{ background: activeAccent, color: '#fff' }}
+                  >
+                    {iconMeta && <iconMeta.Icon className="size-3.5 shrink-0" />}
+                    <span className="flex-1 truncate">{link.title}</span>
+                    <ExternalLink className="size-3.5 shrink-0 opacity-80" />
+                  </div>
+                )
+              })
             )}
           </div>
 
-          {settings.show_branding && (
-            <span className="text-[10px] opacity-50">Made with Linkfy</span>
-          )}
+          {settings.show_branding && <span className="text-[10px] opacity-50">Made with Linkfy</span>}
         </div>
       </CardContent>
     </Card>
