@@ -23,7 +23,7 @@ export async function AppearanceEditorLoader() {
 
   const { data: links } = await supabase
     .from('links')
-    .select('id, title, enabled, icon')
+    .select('id, title, url, enabled, position, clicks, icon')
     .eq('profile_id', user.id)
     .order('position')
 
