@@ -14,7 +14,7 @@ export async function LinksPageLoader() {
 
   const { data: links, error } = await supabase
     .from('links')
-    .select('id, title, url, enabled, position, clicks')
+    .select('id, title, url, enabled, position, clicks, icon')
     .eq('profile_id', user.id)
     .order('position')
 
