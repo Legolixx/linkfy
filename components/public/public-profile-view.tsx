@@ -54,9 +54,9 @@ export function PublicProfileView({ profile, links }: PublicProfileViewProps) {
           loading="eager"
             src={profile.avatar_url ?? "/placeholder.svg"}
             alt={profile.display_name}
-            width={64}
-            height={64}
-            className="size-16 rounded-full object-cover"
+            width={256}
+            height={256}
+            className="size-24 rounded-full object-cover"
           />
 
           <div className="flex flex-col items-center gap-1.5 text-center">
