@@ -33,7 +33,6 @@ export function LivePreview({ settings, links }: LivePreviewProps) {
     accentColors.find((a) => a.id === settings.accent_color)?.value ?? accentColors[0].value
   const visibleLinks = links.filter((l) => l.enabled).slice(0, 5)
 
-  console.log(links)
 
   return (
     <Card>

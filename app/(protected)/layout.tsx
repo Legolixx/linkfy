@@ -1,10 +1,9 @@
+// app/(protected)/layout.tsx
+import { Suspense } from "react";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { DashboardMobileNav } from "@/components/dashboard-mobile-nav";
-//import { Suspense } from "react";
-//import { AuthButton } from "@/components/auth/auth-button";
-import { PageTitle } from "@/components/page-title";
 import { AuthButton } from "@/components/auth/auth-button";
-import { Suspense } from "react";
+import { PageTitle } from "@/components/page-title";
 
 export default function ProtectedLayout({
   children,
@@ -12,30 +11,26 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex bg-background">
+    <div className="flex h-screen overflow-hidden bg-background">
       <DashboardSidebar>
         <Suspense fallback={null}>
           <AuthButton />
         </Suspense>
       </DashboardSidebar>
-      <div className="flex flex-1 flex-col">
-        <header className="flex h-16 items-center border-b px-6">
+
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <header className="flex h-16 shrink-0 items-center border-b px-6">
           <DashboardMobileNav>
             <Suspense fallback={null}>
               <AuthButton />
             </Suspense>
           </DashboardMobileNav>
-          <div className="flex flex-row w-full justify-between">
+          <div className="flex w-full flex-row justify-between">
             <PageTitle />
-            {/*
-            <Suspense>
-              <AuthButton />
-            </Suspense>
-              */}
           </div>
         </header>
 
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-6">{children}</main>
       </div>
     </div>
   );

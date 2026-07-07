@@ -87,6 +87,8 @@ export function PublicProfileView({ profile, links }: PublicProfileViewProps) {
                 <a
                   key={link.id}
                   href={`/api/r/${link.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "flex items-center gap-2 px-4 py-2.5 text-xs font-medium transition-transform hover:scale-[1.02]",
                     buttonStyleMap[profile.button_style],
