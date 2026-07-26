@@ -53,7 +53,7 @@ export function LivePreview({ settings, links }: LivePreviewProps) {
           <div className="flex flex-col items-center gap-1.5 text-center">
             <span className="font-semibold">{settings.display_name}</span>
             <span className="text-xs opacity-70">@{settings.username}</span>
-            <p className="text-xs leading-relaxed opacity-80 text-pretty">{settings.bio}</p>
+            <p className="whitespace-pre-line text-xs leading-relaxed opacity-80 text-pretty">{settings.bio}</p>
           </div>
 
           {settings.show_socials && (

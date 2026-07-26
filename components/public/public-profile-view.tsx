@@ -62,7 +62,7 @@ export function PublicProfileView({ profile, links }: PublicProfileViewProps) {
           <div className="flex flex-col items-center gap-1.5 text-center">
             <span className="font-semibold">{profile.display_name}</span>
             <span className="text-xs opacity-70">@{profile.username}</span>
-            <p className="text-xs leading-relaxed opacity-80 text-pretty">
+            <p className="whitespace-pre-line text-xs leading-relaxed opacity-80 text-pretty">
               {profile.bio}
             </p>
           </div>
