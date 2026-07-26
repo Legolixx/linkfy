@@ -45,8 +45,10 @@ export async function AuthButton() {
           className="flex items-center justify-between gap-2 rounded-lg border bg-muted/40 px-3 py-2.5 text-xs transition-colors hover:bg-muted"
         >
           <div className="flex min-w-0 flex-col gap-0.5">
-            <span className="truncate font-semibold">linkfy.to/{username}</span>
-            <span className="text-muted-foreground">View public page</span>
+            <span className="truncate font-semibold">
+              linkfee.vercel.app/{username}
+            </span>
+            <span className="text-muted-foreground">Ver página pública</span>
           </div>
           <ExternalLink className="size-4 shrink-0 text-muted-foreground" />
         </Link>
@@ -55,13 +57,20 @@ export async function AuthButton() {
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
           <Avatar className="h-10 w-10">
-            <AvatarImage src={profile?.avatar_url ?? "/placeholder.svg"} alt={displayName} />
-            <AvatarFallback>{displayName.slice(0, 2).toUpperCase() || "U"}</AvatarFallback>
+            <AvatarImage
+              src={profile?.avatar_url ?? "/placeholder.svg"}
+              alt={displayName}
+            />
+            <AvatarFallback>
+              {displayName.slice(0, 2).toUpperCase() || "U"}
+            </AvatarFallback>
           </Avatar>
 
           <div className="min-w-0">
             <p className="truncate text-sm font-medium">{displayName}</p>
-            <p className="truncate text-xs text-muted-foreground">@{username}</p>
+            <p className="truncate text-xs text-muted-foreground">
+              @{username}
+            </p>
           </div>
         </div>
 

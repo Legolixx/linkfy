@@ -1,4 +1,3 @@
-// components/sidebar-profile-card.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
@@ -9,7 +8,11 @@ interface SidebarProfileCardProps {
   avatarUrl: string | null;
 }
 
-export function SidebarProfileCard({ username, displayName, avatarUrl }: SidebarProfileCardProps) {
+export function SidebarProfileCard({
+  username,
+  displayName,
+  avatarUrl,
+}: SidebarProfileCardProps) {
   return (
     <div className="flex flex-col gap-3">
       <Link
@@ -19,8 +22,8 @@ export function SidebarProfileCard({ username, displayName, avatarUrl }: Sidebar
         className="flex items-center justify-between gap-2 rounded-lg border bg-muted/40 px-3 py-2.5 text-xs transition-colors hover:bg-muted"
       >
         <div className="flex flex-col gap-0.5 truncate">
-          <span className="truncate font-semibold">linkfy.to/{username}</span>
-          <span className="text-muted-foreground">View public page</span>
+          <span className="truncate font-semibold">linkfee.vercel.app/{username}</span>
+          <span className="text-muted-foreground">Acessar página pública</span>
         </div>
         <ExternalLink className="size-4 shrink-0 text-muted-foreground" />
       </Link>
@@ -35,7 +38,9 @@ export function SidebarProfileCard({ username, displayName, avatarUrl }: Sidebar
         />
         <div className="flex min-w-0 flex-col">
           <span className="truncate text-sm font-medium">{displayName}</span>
-          <span className="truncate text-xs text-muted-foreground">@{username}</span>
+          <span className="truncate text-xs text-muted-foreground">
+            @{username}
+          </span>
         </div>
       </div>
     </div>

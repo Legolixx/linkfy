@@ -3,11 +3,9 @@
 import Link from "next/link";
 import {
   Menu,
-  LayoutDashboard,
   Link2,
   Palette,
   BarChart3,
-  Settings,
 } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -18,7 +16,7 @@ const items = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon: LayoutDashboard,
+    icon: BarChart3,
   },
   {
     title: "Links",
@@ -26,20 +24,10 @@ const items = [
     icon: Link2,
   },
   {
-    title: "Appearance",
+    title: "Aparência",
     href: "/appearance",
     icon: Palette,
-  },
-  {
-    title: "Analytics",
-    href: "/analytics",
-    icon: BarChart3,
-  },
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
-  },
+  }
 ];
 
 interface DashboardMobileNavProps {
@@ -61,6 +49,7 @@ export function DashboardMobileNav({ children }: DashboardMobileNavProps) {
               src="/logo.svg"
               alt="Logo Linkfy"
               fill
+              priority
               className="object-contain"
             />
           </div>

@@ -61,7 +61,7 @@ export function ProfileSection({
       <CardHeader className="border-b">
         <CardTitle>Profile</CardTitle>
         <CardDescription>
-          Your picture, name, and bio shown at the top of your page.
+          Sua foto, nome e biografia exibidos no topo da sua página.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-5">
@@ -78,7 +78,7 @@ export function ProfileSection({
 
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="display-name">Display name</FieldLabel>
+            <FieldLabel htmlFor="display-name">Nome de exibição</FieldLabel>
             <Input
               id="display-name"
               value={settings.display_name}
@@ -86,9 +86,11 @@ export function ProfileSection({
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="username">Username</FieldLabel>
+            <FieldLabel htmlFor="username">Nome de usuário</FieldLabel>
             <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">linkfy.to/</span>
+              <span className="text-sm text-muted-foreground">
+                linkfee.vercel.app/
+              </span>
               <div className="relative flex-1">
                 <Input
                   id="username"
@@ -110,16 +112,18 @@ export function ProfileSection({
               </div>
             </div>
             <FieldDescription>
-              {usernameStatus === "taken" && "Este username já está em uso."}
+              {usernameStatus === "taken" &&
+                "Este nome de usuário já está em uso."}
+
               {usernameStatus === "invalid" &&
-                "Use 3-20 caracteres: letras minúsculas, números ou _."}
-              {usernameStatus === "idle" || usernameStatus === "same"
-                ? "This is your public page address."
-                : null}
+                "Use de 3 a 20 caracteres: letras minúsculas, números ou _."}
+
+              {(usernameStatus === "idle" || usernameStatus === "same") &&
+                "Este será o endereço público da sua página."}
             </FieldDescription>
           </Field>
           <Field>
-            <FieldLabel htmlFor="bio">Bio</FieldLabel>
+            <FieldLabel htmlFor="bio">Biografia</FieldLabel>
             <Textarea
               id="bio"
               rows={3}
@@ -128,7 +132,7 @@ export function ProfileSection({
               maxLength={160}
             />
             <FieldDescription>
-              {settings.bio.length}/160 characters
+              {settings.bio.length}/160 caracteres
             </FieldDescription>
           </Field>
         </FieldGroup>

@@ -142,17 +142,17 @@ export function LinkFormDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{editing ? "Edit link" : "Create link"}</DialogTitle>
+          <DialogTitle>{editing ? "Editar link" : "Criar link"}</DialogTitle>
           <DialogDescription>
             {editing
-              ? "Update the title and destination for this link."
-              : "Add a new link to your Linkfy page."}
+              ? "Atualize o título e o destino deste link."
+              : "Adicione um novo link à sua página do Linkfy."}
           </DialogDescription>
         </DialogHeader>
 
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="link-title">Title</FieldLabel>
+            <FieldLabel htmlFor="link-title">Título</FieldLabel>
             <div className="flex items-center gap-1">
               <Input
                 id="link-title"
@@ -171,7 +171,7 @@ export function LinkFormDialog({
           </Field>
 
           <Field>
-            <FieldLabel>Icon</FieldLabel>
+            <FieldLabel>Ícone</FieldLabel>
             <IconPicker value={icon} onChange={handleIconChange} />
           </Field>
 
@@ -209,7 +209,7 @@ export function LinkFormDialog({
             </>
           ) : (
             <Field>
-              <FieldLabel htmlFor="link-url">Destination URL</FieldLabel>
+              <FieldLabel htmlFor="link-url">URL de destino</FieldLabel>
               <InputGroup>
                 <InputGroupAddon>
                   <LinkIcon />
@@ -237,13 +237,13 @@ export function LinkFormDialog({
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline" disabled={saving}>
-              Cancel
+              Cancelar
             </Button>
           </DialogClose>
 
           <Button onClick={handleSave} disabled={isDisabled}>
             {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {editing ? "Save changes" : "Create link"}
+            {editing ? "Salvar alterações" : "Criar link"}
           </Button>
         </DialogFooter>
       </DialogContent>

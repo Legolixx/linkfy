@@ -8,9 +8,9 @@ import { DashboardMockup } from "@/components/dashboard-mockup";
 import Link from "next/link";
 
 const trust = [
-  "No credit card required",
-  "Custom themes",
-  "Analytics included",
+  "Sem cartão de crédito",
+  "Temas personalizados",
+  "Análises incluídas",
 ];
 
 const fadeUp = {
@@ -47,9 +47,9 @@ export function Hero() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
               <Sparkles className="size-3.5 text-brand" />
-              New
+              Novo
               <span className="text-border">•</span>
-              Completely free to start
+              Comece gratuitamente
             </span>
           </motion.div>
 
@@ -60,8 +60,8 @@ export function Hero() {
             animate="show"
             className="mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
           >
-            Your entire online presence.{" "}
-            <span className="text-gradient">One beautiful link.</span>
+            Toda a sua presença online.{" "}
+            <span className="text-gradient">Em um único link.</span>
           </motion.h1>
 
           <motion.p
@@ -71,9 +71,9 @@ export function Hero() {
             animate="show"
             className="mt-6 text-lg leading-relaxed text-pretty text-muted-foreground"
           >
-            Create your own beautiful bio page in seconds. Share all your social
-            networks, websites, products and content from one modern,
-            customizable link.
+            Crie sua página de links em poucos segundos. Compartilhe redes
+            sociais, sites, produtos e conteúdos em um único lugar, com um
+            design moderno e totalmente personalizável.
           </motion.p>
 
           <motion.div
@@ -88,7 +88,7 @@ export function Hero() {
                 size="lg"
                 className="h-12 rounded-xl bg-gradient-to-r from-brand to-brand-accent px-6 text-base text-brand-foreground shadow-lg shadow-brand/25 transition-transform hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand/30"
               >
-                Get Started Free
+                Começar gratuitamente
                 <ArrowRight />
               </Button>
             </Link>

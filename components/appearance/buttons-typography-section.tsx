@@ -39,14 +39,16 @@ export function ButtonsTypographySection({
   return (
     <Card>
       <CardHeader className="border-b">
-        <CardTitle>Buttons & typography</CardTitle>
+        <CardTitle>Botões e tipografia</CardTitle>
         <CardDescription>
-          Control the shape of your link buttons and page font.
+          Personalize o formato dos botões dos seus links e a fonte da sua
+          página.
         </CardDescription>
       </CardHeader>
+
       <CardContent className="flex flex-col gap-6">
         <div className="flex flex-col gap-3 pt-3">
-          <span className="text-sm font-medium">Button style</span>
+          <span className="text-sm font-medium">Estilo dos botões</span>
           <ToggleGroup
             type="single"
             value={settings.button_style}
@@ -54,17 +56,17 @@ export function ButtonsTypographySection({
             variant="outline"
             className="w-full *:flex-1"
           >
-            <ToggleGroupItem value="rounded">Rounded</ToggleGroupItem>
-            <ToggleGroupItem value="square">Square</ToggleGroupItem>
-            <ToggleGroupItem value="pill">Pill</ToggleGroupItem>
+            <ToggleGroupItem value="rounded">Arredondado</ToggleGroupItem>
+            <ToggleGroupItem value="square">Quadrado</ToggleGroupItem>
+            <ToggleGroupItem value="pill">Pílula</ToggleGroupItem>
           </ToggleGroup>
         </div>
 
         <Field orientation="horizontal">
           <FieldContent>
-            <FieldTitle>Font family</FieldTitle>
+            <FieldTitle>Fonte</FieldTitle>
             <FieldDescription>
-              Applied across your public page.
+              Aplicada em toda a sua página pública.
             </FieldDescription>
           </FieldContent>
           <Select

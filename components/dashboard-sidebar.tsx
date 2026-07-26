@@ -3,11 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
   Link2,
   Palette,
   BarChart3,
-  Settings,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -18,7 +16,7 @@ const items = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon: LayoutDashboard,
+    icon: BarChart3,
   },
   {
     title: "Links",
@@ -26,19 +24,9 @@ const items = [
     icon: Link2,
   },
   {
-    title: "Appearance",
+    title: "Aparência",
     href: "/appearance",
     icon: Palette,
-  },
-  {
-    title: "Analytics",
-    href: "/analytics",
-    icon: BarChart3,
-  },
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
   },
 ];
 
@@ -57,6 +45,7 @@ export function DashboardSidebar({ children }: DashboardSidebarProps) {
               src="/logo.svg"
               alt="Logo Linkfy"
               fill
+              priority
               className="object-contain"
             />
           </div>

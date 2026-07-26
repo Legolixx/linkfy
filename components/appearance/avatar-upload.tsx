@@ -87,9 +87,9 @@ export function AvatarUpload({ userId, displayName, avatarUrl, onUploaded }: Ava
           onClick={() => inputRef.current?.click()}
         >
           {uploading ? <Loader2 className="animate-spin" /> : <Camera data-icon="inline-start" />}
-          {uploading ? 'Enviando...' : 'Change picture'}
+          {uploading ? 'Enviando...' : 'Alterar foto de perfil'}
         </Button>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-muted-foreground pl-2">
           {error ?? 'JPG, PNG ou GIF. Máx 2MB.'}
         </span>
       </div>

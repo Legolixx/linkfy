@@ -155,16 +155,16 @@ export function LinkCard({
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => onEdit(link)}>
                 <Pencil />
-                Edit
+                Editar
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onDuplicate(link.id)}>
                 <Copy />
-                Duplicate
+                Duplicar
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <a href={link.url} target="_blank" rel="noopener noreferrer">
                   <ExternalLink />
-                  Open
+                  Abrir
                 </a>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -173,7 +173,7 @@ export function LinkCard({
                 className="text-destructive focus:text-destructive"
               >
                 <Trash2 />
-                Delete
+                Deletar
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
