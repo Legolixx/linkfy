@@ -43,32 +43,38 @@ export function PublicProfileView({ profile, links }: PublicProfileViewProps) {
     accentColors[0].value;
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-muted/30 px-4 py-10">
-      <div
-        className="flex h-[65vh] max-h-[820px] w-full max-w-sm flex-col rounded-[40px] border border-border p-6 shadow-sm"
-        style={{ background: activeTheme.bg, color: activeTheme.fg }}
-      >
-        {/* Cabeçalho — nunca rola */}
-        <div className="flex shrink-0 flex-col items-center gap-5">
+    // O fundo agora ocupa a tela inteira com a cor do tema,
+    // e é a PÁGINA que rola — não um container interno.
+    <main
+      className="min-h-screen w-full"
+      style={{ background: activeTheme.bg, color: activeTheme.fg }}
+    >
+      <div className="mx-auto flex min-h-screen w-full max-w-md flex-col items-center px-5 py-12 sm:max-w-lg sm:px-8 sm:py-16 lg:max-w-xl">
+        {/* Cabeçalho */}
+        <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
           <Image
-          loading="eager"
+            loading="eager"
             src={profile.avatar_url ?? "/placeholder.svg"}
             alt={profile.display_name}
             width={256}
             height={256}
-            className="size-24 rounded-full object-cover"
+            className="size-24 rounded-full object-cover ring-4 ring-black/5 sm:size-28 lg:size-32"
           />
 
           <div className="flex flex-col items-center gap-1.5 text-center">
-            <span className="font-semibold">{profile.display_name}</span>
-            <span className="text-xs opacity-70">@{profile.username}</span>
-            <p className="whitespace-pre-line text-xs leading-relaxed opacity-80 text-pretty">
-              {profile.bio}
-            </p>
+            <span className="text-base font-semibold sm:text-lg">
+              {profile.display_name}
+            </span>
+            <span className="text-sm opacity-70">@{profile.username}</span>
+            {profile.bio && (
+              <p className="mt-1 max-w-sm whitespace-pre-line text-sm leading-relaxed opacity-80 text-pretty">
+                {profile.bio}
+              </p>
+            )}
           </div>
 
           {profile.show_socials && (
-            <div className="flex items-center gap-4 opacity-80">
+            <div className="flex items-center gap-5 opacity-80">
               <Globe className="size-5" />
               <AtSign className="size-5" />
               <Share2 className="size-5" />
@@ -76,37 +82,39 @@ export function PublicProfileView({ profile, links }: PublicProfileViewProps) {
           )}
         </div>
 
-        {/* Lista de links — única parte que rola */}
-        <div className="mt-5 flex-1 overflow-y-auto overflow-x-hidden">
-          <div className="flex flex-col gap-2.5 pb-2">
-            {links.map((link) => {
-              const iconMeta = getLinkIcon(link.icon);
-              const Icon = iconMeta?.Icon;
+        {/* Lista de links — sem scroll próprio, cresce com a página */}
+        <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:gap-3.5">
+          {links.map((link) => {
+            const iconMeta = getLinkIcon(link.icon);
+            const Icon = iconMeta?.Icon;
 
-              return (
-                <a
-                  key={link.id}
-                  href={`/api/r/${link.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "flex items-center gap-2 px-4 py-2.5 text-xs font-medium transition-transform hover:scale-[1.02]",
-                    buttonStyleMap[profile.button_style],
-                  )}
-                  style={{ background: activeAccent, color: "#fff" }}
-                >
-                  {Icon && <Icon className="size-3.5 shrink-0" />}
-                  <span className="flex-1 truncate">{link.title}</span>
-                  <ExternalLink className="size-3.5 shrink-0 opacity-80" />
-                </a>
-              );
-            })}
-          </div>
+            return (
+              <a
+                key={link.id}
+                href={`/api/r/${link.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "group flex w-full items-center gap-3 px-5 py-3.5 text-sm font-medium shadow-sm transition-all",
+                  "hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:scale-[0.99]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+                  buttonStyleMap[profile.button_style],
+                )}
+                style={{ background: activeAccent, color: "#fff" }}
+              >
+                {Icon && <Icon className="size-4 shrink-0" />}
+                <span className="flex-1 truncate text-center sm:text-[15px]">
+                  {link.title}
+                </span>
+                <ExternalLink className="size-4 shrink-0 opacity-70 transition-opacity group-hover:opacity-100" />
+              </a>
+            );
+          })}
         </div>
 
-        {/* Rodapé — nunca rola */}
+        {/* Rodapé */}
         {profile.show_branding && (
-          <span className="shrink-0 pt-4 text-center text-[10px] opacity-50">
+          <span className="mt-10 text-center text-xs opacity-50">
             Made with Linkfy
           </span>
         )}

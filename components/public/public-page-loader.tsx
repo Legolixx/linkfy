@@ -1,4 +1,3 @@
-// components/public/public-page-loader.tsx
 import { notFound } from 'next/navigation'
 import { headers } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
